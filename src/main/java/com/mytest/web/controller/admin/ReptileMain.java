@@ -13,7 +13,7 @@ public class ReptileMain {
 
 	public static void main(String[] args) {
 		System.setProperty("webdriver.chrome.driver",
-				"C:\\Users\\RYX\\Downloads\\chromedriver_win32\\chromedriver.exe");
+				"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
 
 		WebDriver driver = new ChromeDriver();
 		driver.get("http://whfq.hsxia.cn/business/");
@@ -31,7 +31,7 @@ public class ReptileMain {
 			System.out.println(new Date());
 //			File file = new File("C:\\Users\\RYX\\Documents\\11.jpg");
 //			FileDownLoad.downLoadFromUrl(src,"11.jpg","C:\\Users\\RYX\\Documents");
-			String verifyCodeStr = FileDownLoad.captchCode(driver, code, "C:\\Users\\RYX\\Documents\\11.png");
+			String verifyCodeStr = FileDownLoad.captchCode(driver, code, "C:\\Users\\zengp\\Documents\\11.png");
 			//File file = new File("C:\\Users\\RYX\\Documents\\11.png");
 			
 			//String verifyCodeStr = CaptchaUtil.convert(file, "1004"); // 调用第三方自动解析验证码接口获取验证码值

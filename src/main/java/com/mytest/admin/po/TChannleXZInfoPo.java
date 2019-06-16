@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.base.annotation.BeanMeta;
@@ -19,13 +17,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "t_user_chennel_bind")
+@Table(name = "t_channle_xz_info")
 @BeanMeta
 @Getter
 @Setter
-public class TUserChannleBindInfoPo extends MBeanBase implements Serializable {
-
-	private static final long serialVersionUID = 139680944935195372L;
+public class TChannleXZInfoPo extends MBeanBase implements Serializable {
+	private static final long serialVersionUID = -3393641294306938691L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -33,15 +30,17 @@ public class TUserChannleBindInfoPo extends MBeanBase implements Serializable {
 	private long userId;
 	@Column(name="channel_id")
 	private long channelId;
+	@Column(name="regist_num")
+	private long registNum;//
+	@Column(name="applicants_num")
+	private int applicantsNum;//
+	@Column(name="loan_num")
+	private String loanNum;//
 	@Column(name="createtime")
 	private Timestamp createTime;
 	@Column(name="updatetime")
 	private Timestamp updateTime;
 	@Column(name="status")
 	private int status;
-	
-	@OneToOne(targetEntity=TChannleInfoPo.class)
-	@JoinColumn(name="channel_id", referencedColumnName="id", unique=false, nullable=false,insertable=false, updatable=false)
-	private TChannleInfoPo channleInfoPo;
 	
 }

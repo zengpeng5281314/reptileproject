@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.google.gson.JsonObject;
-import com.mytest.admin.po.TChannleBDetailedInfoPo;
+import com.mytest.admin.po.TChannleXZInfoPo;
 import com.mytest.admin.po.TChannleInfoPo;
 import com.mytest.admin.po.TUserChannleBindInfoPo;
 import com.mytest.admin.po.TUserInfoPo;
@@ -104,7 +104,7 @@ public class ChannelDetailedInfoController extends BaseController {
 		Page page = new Page(currentPage, pageSize);
 		Page pageList = channelDetailedInfoService.pageTChannleDetailedInfoPo(userId, channelId,startT,endT,page);
 
-		List<TChannleBDetailedInfoPo> list = (List<TChannleBDetailedInfoPo>) pageList.getList();
+		List<TChannleXZInfoPo> list = (List<TChannleXZInfoPo>) pageList.getList();
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.registerJsonValueProcessor(Timestamp.class, new JsonDateValueProcessor("yyyy-MM-dd"));
 		model.put("list", JSONArray.fromObject(list, jsonConfig));
@@ -136,7 +136,7 @@ public class ChannelDetailedInfoController extends BaseController {
 		Page page = new Page(currentPage, pageSize);
 		Page pageList = channelDetailedInfoService.pageTChannleDetailedInfoPo(userId, channelId,startT,endT,page);
 
-		List<TChannleBDetailedInfoPo> list = (List<TChannleBDetailedInfoPo>) pageList.getList();
+		List<TChannleXZInfoPo> list = (List<TChannleXZInfoPo>) pageList.getList();
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.registerJsonValueProcessor(Timestamp.class, new JsonDateValueProcessor("yyyy-MM-dd"));
 		JSONObject json = new JSONObject();
