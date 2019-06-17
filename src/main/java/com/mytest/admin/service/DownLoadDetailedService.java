@@ -1,5 +1,7 @@
 package com.mytest.admin.service;
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,29 +18,28 @@ public class DownLoadDetailedService {
 	MBeanDAO mBeanDAO;
 	@Autowired
 	MFrameworkService mFrameworkService;
-	
-	public TChannleXZInfoPo getTChannleXZtailedInfoPo(long userId){
+
+	public TChannleXZInfoPo getTChannleXZInfoPo(long userId) {
 		MParam mparam = new MParam();
 		mparam.add("userId", userId);
 		return mFrameworkService.get(TChannleXZInfoPo.class, mparam);
 	}
-	
-	public void saveOrUpdateTChannleXZtailedInfoPo(TChannleXZInfoPo tChannleXZtailedInfoPo){
-		mBeanDAO.saveOrUpdate(tChannleXZtailedInfoPo);
+
+	public void saveOrUpdatetTChannleXZInfoPo(TChannleXZInfoPo channleXZInfoPo) {
+		mBeanDAO.saveOrUpdate(channleXZInfoPo);
 	}
-	
-	public TChannleXZDetailedInfoPo getTChannleXZDetailedInfoPo(long userId,int nameNo){
+
+	public TChannleXZDetailedInfoPo getTChannleXZDetailedInfoPo(long userId, String phone, String registTime) {
 		MParam mparam = new MParam();
 		mparam.add("userId", userId);
-		mparam.add("nameNo", nameNo);
+		mparam.add("phone", phone);
+		String hql = " and registTime='"+registTime+"'";
+		mparam.setOrderbyHQL(hql);
 		return mFrameworkService.get(TChannleXZDetailedInfoPo.class, mparam);
 	}
-	
-	public void saveOrUpdateTChannleXZtailedInfoPo(TChannleXZDetailedInfoPo tChannleXZInfoPo){
-		mBeanDAO.saveOrUpdate(tChannleXZInfoPo);
+
+	public void saveOrUpdateTChannleXZtailedInfoPo(TChannleXZDetailedInfoPo channleXZDetailedInfoPo) {
+		mBeanDAO.saveOrUpdate(channleXZDetailedInfoPo);
 	}
-	
-	
-	
-	
+
 }

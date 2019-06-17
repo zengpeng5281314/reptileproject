@@ -31,11 +31,11 @@ public class TChannleXZInfoPo extends MBeanBase implements Serializable {
 	@Column(name="channel_id")
 	private long channelId;
 	@Column(name="regist_num")
-	private long registNum;//
+	private int registNum;//
 	@Column(name="applicants_num")
 	private int applicantsNum;//
 	@Column(name="loan_num")
-	private String loanNum;//
+	private int loanNum;//
 	@Column(name="createtime")
 	private Timestamp createTime;
 	@Column(name="updatetime")

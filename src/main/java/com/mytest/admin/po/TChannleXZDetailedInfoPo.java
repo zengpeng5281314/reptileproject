@@ -30,8 +30,8 @@ public class TChannleXZDetailedInfoPo extends MBeanBase implements Serializable 
 	private long userId;
 	@Column(name="channel_id")
 	private long channelId;
-	@Column(name="xz_id")
-	private long xzId;//
+//	@Column(name="xz_id")
+//	private long xzId;//
 	@Column(name="name_no")
 	private int nameNo;//编号
 	@Column(name="name")
