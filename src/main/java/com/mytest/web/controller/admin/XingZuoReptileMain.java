@@ -48,6 +48,26 @@ public class XingZuoReptileMain {
 			e.printStackTrace();
 		}
 
+		WebElement start = driver.findElement(By.xpath("//*[@id=\"range-picker\"]/span/input[1]"));
+		start.click();
+		//		startime.sendKeys("2019-06-19");
+		
+		WebElement startime = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[1]/div[1]/div/input"));
+		startime.sendKeys("2019-06-19");
+		WebElement endtime = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div[1]/div/input"));
+		
+//		WebElement endtime = driver.findElement(By.xpath("//*[@id=\"range-picker\"]/span/input[2]"));
+		endtime.sendKeys("2019-06-20");
+		
+		WebElement search = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[3]/div/div/div/span/span/button[1]"));
+		search.click();
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		// WebElement frame =
 		// driver.findElement(By.xpath("//*[@id='content-main']/iframe[2]"));
 		// driver = driver.switchTo().frame(frame);
@@ -60,26 +80,16 @@ public class XingZuoReptileMain {
 				"//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[2]/div/div/div/div/div/div/div/table/tbody/tr/td[2]"));
 		System.out.println("---" + applactionNum.getText());
 
-		// //下载
-		WebElement one = driver.findElement(
-				By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[4]/button"));
-		one.click();
+//		//下载
+//		WebElement one = driver.findElement(
+//				By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[4]/button"));
+//		one.click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		driver.get("chrome://downloads/");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		System.out.println("---" + driver.getPageSource());
-		WebElement fileName = driver.findElement(By.xpath("//*[@id=\"title-area\"]"));
-
-		System.out.println("---" + fileName.getText());
+		
 
 		// *[@id="root"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[2]/div/div/div/div/div/div/div/table/tbody/tr/td[2]
 		// try {

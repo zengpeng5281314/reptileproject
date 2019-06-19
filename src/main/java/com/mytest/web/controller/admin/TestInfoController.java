@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,9 +50,12 @@ public class TestInfoController extends BaseController {
 	@Transactional
 	@ResponseBody
 	public String test(@RequestParam(defaultValue = "0", required = false, value = "userId") long userId,
-			HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+			@RequestParam(defaultValue = "", required = false, value = "date") String date, HttpServletRequest request,
+			HttpServletResponse response, ModelMap model) throws Exception {
 		List<TXZDownUserInfoPo> list = downLoadUserInfoService.allTXZDownUserInfoPoList();
-
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		if (date.equals(""))
+			date = sdf.format(new Date());
 		for (TXZDownUserInfoPo txzDownUserInfoPo : list) {
 			System.setProperty("webdriver.chrome.driver",
 					"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
@@ -66,12 +70,24 @@ public class TestInfoController extends BaseController {
 			try {
 				WebElement loginBtn = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/form/button"));
 				loginBtn.click();
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 				WebElement zw = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/div/ul/li"));
 				zw.click();
 
 				Thread.sleep(2000);
-
+				// 选择时间
+				WebElement start = driver.findElement(By.xpath("//*[@id=\"range-picker\"]/span/input[1]"));
+				start.click();
+				WebElement startime = driver
+						.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[1]/div[1]/div/input"));
+				startime.sendKeys(date);
+				WebElement endtime = driver
+						.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div[1]/div/input"));
+				endtime.sendKeys(date);
+				WebElement search = driver.findElement(By.xpath(
+						"//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[3]/div/div/div/span/span/button[1]"));
+				search.click();
+				Thread.sleep(2000);
 				WebElement registNum = driver.findElement(By.xpath(
 						"//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[2]/div/div/div/div/div/div/div/table/tbody/tr/td[1]"));
 				System.out.println("---" + registNum.getText());
@@ -81,24 +97,26 @@ public class TestInfoController extends BaseController {
 				System.out.println("---" + applactionNum.getText());
 
 				TChannleXZInfoPo channleXZInfoPo = downLoadDetailedService
-						.getTChannleXZInfoPo(txzDownUserInfoPo.getUserId());
+						.getTChannleXZInfoPo(txzDownUserInfoPo.getUserId(), date);
 				if (channleXZInfoPo == null) {
 					channleXZInfoPo = new TChannleXZInfoPo();
+					channleXZInfoPo.setCtime(sdf.parse(date));
 					channleXZInfoPo.setUserId(txzDownUserInfoPo.getUserId());
 					channleXZInfoPo.setChannelId(txzDownUserInfoPo.getChannelId());
 					channleXZInfoPo.setCreateTime(new Timestamp(System.currentTimeMillis()));
 					channleXZInfoPo.setStatus(1);
-					channleXZInfoPo.setUserId(userId);
 				}
 				channleXZInfoPo.setApplicantsNum(Integer.valueOf(applactionNum.getText()));
 				channleXZInfoPo.setRegistNum(Integer.valueOf(registNum.getText()));
 				downLoadDetailedService.saveOrUpdatetTChannleXZInfoPo(channleXZInfoPo);
 
-				// //下载
-				WebElement one = driver.findElement(By.xpath(
-						"//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[4]/button"));
-				one.click();
-				Thread.sleep(2000);
+				if (Integer.valueOf(registNum.getText()) > 0) {
+					// //下载
+					WebElement one = driver.findElement(By.xpath(
+							"//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[4]/button"));
+					one.click();
+					Thread.sleep(2000);
+				}
 				driver.quit();
 
 			} catch (Throwable e11) {
@@ -149,11 +167,11 @@ public class TestInfoController extends BaseController {
 						default:
 							break;
 						}
-						
+
 					}
 					Timestamp time = new Timestamp(sdf.parse(registTime).getTime());
 					TChannleXZDetailedInfoPo channleXZDetailedInfoPo = downLoadDetailedService
-							.getTChannleXZDetailedInfoPo(userId, phone,registTime);
+							.getTChannleXZDetailedInfoPo(userId, phone, registTime);
 					if (channleXZDetailedInfoPo == null) {
 						channleXZDetailedInfoPo = new TChannleXZDetailedInfoPo();
 						channleXZDetailedInfoPo.setChannelId(channelId);
@@ -163,7 +181,7 @@ public class TestInfoController extends BaseController {
 						channleXZDetailedInfoPo.setStatus(1);
 						channleXZDetailedInfoPo.setType(1);
 						channleXZDetailedInfoPo.setUserId(userId);
-						//channleXZDetailedInfoPo.setXzId(0);
+						// channleXZDetailedInfoPo.setXzId(0);
 					}
 					channleXZDetailedInfoPo.setName(name);
 					channleXZDetailedInfoPo.setNameNo(nameNo);

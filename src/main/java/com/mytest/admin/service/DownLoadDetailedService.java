@@ -19,9 +19,10 @@ public class DownLoadDetailedService {
 	@Autowired
 	MFrameworkService mFrameworkService;
 
-	public TChannleXZInfoPo getTChannleXZInfoPo(long userId) {
+	public TChannleXZInfoPo getTChannleXZInfoPo(long userId,String date) {
 		MParam mparam = new MParam();
 		mparam.add("userId", userId);
+		mparam.setOrderbyHQL(" and ctime='"+date+"' ");
 		return mFrameworkService.get(TChannleXZInfoPo.class, mparam);
 	}
 

@@ -2,6 +2,7 @@ package com.mytest.admin.po;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,6 +37,8 @@ public class TChannleXZInfoPo extends MBeanBase implements Serializable {
 	private int applicantsNum;//
 	@Column(name="loan_num")
 	private int loanNum;//
+	@Column(name="ctime")
+	private Date ctime;
 	@Column(name="createtime")
 	private Timestamp createTime;
 	@Column(name="updatetime")
