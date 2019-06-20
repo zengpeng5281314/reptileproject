@@ -32,6 +32,7 @@ import com.mytest.admin.po.TXZDownUserInfoPo;
 import com.mytest.admin.service.DownLoadDetailedService;
 import com.mytest.admin.service.DownLoadService;
 import com.mytest.admin.service.DownLoadUserInfoService;
+import com.mytest.utils.AHttpClient;
 import com.mytest.web.controller.base.BaseController;
 
 @Controller
@@ -118,7 +119,13 @@ public class TestInfoController extends BaseController {
 					Thread.sleep(2000);
 				}
 				driver.quit();
-
+				if (Integer.valueOf(registNum.getText()) > 0) {
+					// 解析数据
+					logger.info("解析数据userId:" + txzDownUserInfoPo.getUserId());
+					AHttpClient aHttpClient = new AHttpClient();
+					aHttpClient.doHttpGetRequest(
+							"http://localhost:8080/xingzuo/analysis?userId=" + txzDownUserInfoPo.getUserId());
+				}
 			} catch (Throwable e11) {
 				e11.printStackTrace();
 			}
@@ -136,7 +143,7 @@ public class TestInfoController extends BaseController {
 
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String fileUrl = "D:\\dataSource\\outputReport\\Downloads\\" + userId;
+			String fileUrl = "C:\\Users\\Administrator\\Downloads\\reptileproject\\" + userId;
 			// 获取所有以xsl结尾的文件
 			List<File> list = downLoadService.getFileList(fileUrl);
 			for (File file : list) {
