@@ -63,7 +63,7 @@ public class TestInfoController extends BaseController {
 			DesiredCapabilities caps = downLoadService.setDownloadsPath(String.valueOf(txzDownUserInfoPo.getUserId()));// 更改默认下载路径
 
 			WebDriver driver = new ChromeDriver(caps);
-			driver.get("https://channel.mcdonald.gamescpu.com:8090/#/login");
+			driver.get(txzDownUserInfoPo.getAddress());
 			WebElement loginName = driver.findElement(By.xpath("//*[@id=\"name\"]"));
 			loginName.sendKeys(txzDownUserInfoPo.getUserName());
 			WebElement loginPwd = driver.findElement(By.xpath("//*[@id=\"password\"]"));
@@ -128,6 +128,7 @@ public class TestInfoController extends BaseController {
 				}
 			} catch (Throwable e11) {
 				e11.printStackTrace();
+				driver.quit();
 			}
 		}
 
