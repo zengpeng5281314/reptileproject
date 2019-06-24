@@ -22,6 +22,7 @@ import com.mytest.admin.service.DownLoadDetailedService;
 import com.mytest.admin.service.DownLoadService;
 import com.mytest.admin.service.DownLoadUserInfoService;
 import com.mytest.utils.AHttpClient;
+import com.mytest.utils.HttpClient4;
 
 @Component
 public class ChannelDetaileTask {
@@ -38,7 +39,7 @@ public class ChannelDetaileTask {
 	/**
 	 * 每1分钟执行一次
 	 */
-	@Scheduled(cron = "0 */3 * * * ?")
+	@Scheduled(cron = "0 */10 * * * ?")
 	public void flushChannelDetaile() {
 		List<TXZDownUserInfoPo> list = downLoadUserInfoService.allTXZDownUserInfoPoList();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -111,12 +112,14 @@ public class ChannelDetaileTask {
 				if (registNums > 0) {
 					// 解析数据
 					logger.info("解析数据userId:" + txzDownUserInfoPo.getUserId());
-					AHttpClient aHttpClient = new AHttpClient();
-					aHttpClient.doHttpGetRequest(
-							"http://localhost:8080/xingzuo/analysis?userId=" + txzDownUserInfoPo.getUserId());
+					HttpClient4.doGet("http://localhost:8080/xingzuo/analysis?userId=" + txzDownUserInfoPo.getUserId());
+//					AHttpClient aHttpClient = new AHttpClient();
+//					aHttpClient.doHttpGetRequest(
+//							"http://localhost:8080/xingzuo/analysis?userId=" + txzDownUserInfoPo.getUserId());
 				}
 			} catch (Throwable e11) {
 				e11.printStackTrace();
+				driver.quit();
 			}
 		}
 	}

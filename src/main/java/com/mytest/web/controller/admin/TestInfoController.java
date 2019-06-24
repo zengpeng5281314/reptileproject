@@ -33,6 +33,7 @@ import com.mytest.admin.service.DownLoadDetailedService;
 import com.mytest.admin.service.DownLoadService;
 import com.mytest.admin.service.DownLoadUserInfoService;
 import com.mytest.utils.AHttpClient;
+import com.mytest.utils.HttpClient4;
 import com.mytest.web.controller.base.BaseController;
 
 @Controller
@@ -74,7 +75,6 @@ public class TestInfoController extends BaseController {
 				Thread.sleep(1000);
 				WebElement zw = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/div/ul/li"));
 				zw.click();
-
 				Thread.sleep(2000);
 				// 选择时间
 				WebElement start = driver.findElement(By.xpath("//*[@id=\"range-picker\"]/span/input[1]"));
@@ -124,9 +124,10 @@ public class TestInfoController extends BaseController {
 				if (registNums > 0) {
 					// 解析数据
 					logger.info("解析数据userId:" + txzDownUserInfoPo.getUserId());
-					AHttpClient aHttpClient = new AHttpClient();
-					aHttpClient.doHttpGetRequest(
-							"http://localhost:8080/xingzuo/analysis?userId=" + txzDownUserInfoPo.getUserId());
+					HttpClient4.doGet("http://localhost:8080/xingzuo/analysis?userId=" + txzDownUserInfoPo.getUserId()+"&channelId="+txzDownUserInfoPo.getChannelId());
+//					AHttpClient aHttpClient = new AHttpClient();
+//					aHttpClient.doHttpGetRequest(
+//							"http://localhost:8080/xingzuo/analysis?userId=" + txzDownUserInfoPo.getUserId());
 				}
 			} catch (Throwable e11) {
 				e11.printStackTrace();
@@ -146,7 +147,7 @@ public class TestInfoController extends BaseController {
 
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String fileUrl = "C:\\Users\\Administrator\\Downloads\\reptileproject\\" + userId;
+			String fileUrl = "C:\\Users\\RYX\\Downloads\\reptileproject\\" + userId;
 			// 获取所有以xsl结尾的文件
 			List<File> list = downLoadService.getFileList(fileUrl);
 			for (File file : list) {
