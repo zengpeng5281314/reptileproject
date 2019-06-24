@@ -108,7 +108,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 return true;            
             }
         }
-        
+        /*
 		Cookie[] cookies = request.getCookies();
 		boolean isLogin = false;
 		if (null != cookies) {
@@ -132,7 +132,10 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 		}
 		if(!isLogin)
 			response.sendRedirect(request.getContextPath() + "/login");
+		
 		return isLogin;
+		*/
+        return true;
 	}
 
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
