@@ -89,10 +89,12 @@ public class TestInfoController extends BaseController {
 						"//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[3]/div/div/div/span/span/button[1]"));
 				search.click();
 				Thread.sleep(2000);
+				int registNums = 0;
 				WebElement registNum = driver.findElement(By.xpath(
 						"//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[2]/div/div/div/div/div/div/div/table/tbody/tr/td[1]"));
 				System.out.println("---" + registNum.getText());
-
+				registNums = Integer.valueOf(registNum.getText());
+				
 				WebElement applactionNum = driver.findElement(By.xpath(
 						"//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[2]/div/div/div/div/div/div/div/table/tbody/tr/td[2]"));
 				System.out.println("---" + applactionNum.getText());
@@ -108,10 +110,10 @@ public class TestInfoController extends BaseController {
 					channleXZInfoPo.setStatus(1);
 				}
 				channleXZInfoPo.setApplicantsNum(Integer.valueOf(applactionNum.getText()));
-				channleXZInfoPo.setRegistNum(Integer.valueOf(registNum.getText()));
+				channleXZInfoPo.setRegistNum(registNums);
 				downLoadDetailedService.saveOrUpdatetTChannleXZInfoPo(channleXZInfoPo);
 
-				if (Integer.valueOf(registNum.getText()) > 0) {
+				if (registNums > 0) {
 					// //下载
 					WebElement one = driver.findElement(By.xpath(
 							"//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[4]/button"));
@@ -119,7 +121,7 @@ public class TestInfoController extends BaseController {
 					Thread.sleep(2000);
 				}
 				driver.quit();
-				if (Integer.valueOf(registNum.getText()) > 0) {
+				if (registNums > 0) {
 					// 解析数据
 					logger.info("解析数据userId:" + txzDownUserInfoPo.getUserId());
 					AHttpClient aHttpClient = new AHttpClient();
