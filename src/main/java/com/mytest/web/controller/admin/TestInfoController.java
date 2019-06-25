@@ -124,7 +124,7 @@ public class TestInfoController extends BaseController {
 				if (registNums > 0) {
 					// 解析数据
 					logger.info("解析数据userId:" + txzDownUserInfoPo.getUserId());
-					HttpClient4.doGet("http://localhost:8080/xingzuo/analysis?userId=" + txzDownUserInfoPo.getUserId()+"&channelId="+txzDownUserInfoPo.getChannelId());
+					HttpClient4.doGet("http://localhost:8081/xingzuo/analysis?userId=" + txzDownUserInfoPo.getUserId()+"&channelId="+txzDownUserInfoPo.getChannelId());
 //					AHttpClient aHttpClient = new AHttpClient();
 //					aHttpClient.doHttpGetRequest(
 //							"http://localhost:8080/xingzuo/analysis?userId=" + txzDownUserInfoPo.getUserId());
@@ -147,7 +147,7 @@ public class TestInfoController extends BaseController {
 
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String fileUrl = "C:\\Users\\RYX\\Downloads\\reptileproject\\" + userId;
+			String fileUrl = "C:\\Users\\Administrator\\Downloads\\reptileproject\\" + userId;
 			// 获取所有以xsl结尾的文件
 			List<File> list = downLoadService.getFileList(fileUrl);
 			for (File file : list) {
