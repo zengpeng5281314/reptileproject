@@ -112,7 +112,7 @@ public class ChannelDetaileTask {
 				if (registNums > 0) {
 					// 解析数据
 					logger.info("解析数据userId:" + txzDownUserInfoPo.getUserId());
-					HttpClient4.doGet("http://localhost:8080/xingzuo/analysis?userId=" + txzDownUserInfoPo.getUserId());
+					HttpClient4.doGet("http://localhost:8081/xingzuo/analysis?userId=" + txzDownUserInfoPo.getUserId());
 //					AHttpClient aHttpClient = new AHttpClient();
 //					aHttpClient.doHttpGetRequest(
 //							"http://localhost:8080/xingzuo/analysis?userId=" + txzDownUserInfoPo.getUserId());
