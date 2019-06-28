@@ -39,7 +39,7 @@ public class ChannelDetaileTask {
 	/**
 	 * 每1分钟执行一次
 	 */
-	@Scheduled(cron = "0 */10 * * * ?")
+	@Scheduled(cron = "0 */5 * * * ?")
 	public void flushChannelDetaile() {
 		List<TXZDownUserInfoPo> list = downLoadUserInfoService.allTXZDownUserInfoPoList();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
