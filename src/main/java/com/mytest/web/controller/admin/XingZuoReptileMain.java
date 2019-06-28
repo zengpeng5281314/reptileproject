@@ -53,6 +53,11 @@ public class XingZuoReptileMain {
 		
 		WebElement channel = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[1]/div/div[2]/div/span/div/div/div"));
 		channel.click();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		WebElement channels = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/ul/li[6]"));
 		channels.click();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -85,16 +90,17 @@ public class XingZuoReptileMain {
 				"//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[2]/div/div/div/div/div/div/div/table/tbody/tr/td[2]"));
 		System.out.println("---" + applactionNum.getText());
 
-		//下载
-		WebElement one = driver.findElement(
-				By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[4]/button"));
-		one.click();
+		
+//		//下载
+//		WebElement one = driver.findElement(
+//				By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[4]/button"));
+//		one.click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+		driver.quit();
 
 		// *[@id="root"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[2]/div/div/div/div/div/div/div/table/tbody/tr/td[2]
 		// try {

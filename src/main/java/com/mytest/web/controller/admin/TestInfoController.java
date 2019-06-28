@@ -80,6 +80,7 @@ public class TestInfoController extends BaseController {
 				
 				WebElement chooseChannel = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[1]/div/div[2]/div/span/div/div/div"));
 				chooseChannel.click();
+				Thread.sleep(1000);
 				WebElement channels = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/ul/li["+txzDownUserInfoPo.getChannelNum()+"]"));
 				channels.click();
 				
