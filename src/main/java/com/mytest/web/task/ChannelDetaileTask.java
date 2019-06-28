@@ -64,14 +64,20 @@ public class ChannelDetaileTask {
 				zw.click();
 
 				Thread.sleep(2000);
+				
+				WebElement chooseChannel = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[1]/div/div[2]/div/span/div/div/div"));
+				chooseChannel.click();
+				WebElement channels = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/ul/li["+txzDownUserInfoPo.getChannelNum()+"]"));
+				channels.click();
+				
 				// 选择时间
 				WebElement start = driver.findElement(By.xpath("//*[@id=\"range-picker\"]/span/input[1]"));
 				start.click();
 				WebElement startime = driver
-						.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[1]/div[1]/div/input"));
+						.findElement(By.xpath("/html/body/div[3]/div/div/div/div/div[1]/div[1]/div[1]/div/input"));
 				startime.sendKeys(date);
 				WebElement endtime = driver
-						.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div[1]/div/input"));
+						.findElement(By.xpath("/html/body/div[3]/div/div/div/div/div[1]/div[2]/div[1]/div/input"));
 				endtime.sendKeys(date);
 				WebElement search = driver.findElement(By.xpath(
 						"//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[3]/div/div/div/span/span/button[1]"));
