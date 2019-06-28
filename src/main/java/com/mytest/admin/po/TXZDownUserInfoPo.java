@@ -36,6 +36,10 @@ public class TXZDownUserInfoPo extends MBeanBase implements Serializable {
 	private String userName;
 	@Column(name="user_pwd")
 	private String userPwd;//
+	@Column(name="channel_num")
+	private int channelNum;//
+	@Column(name="type")
+	private int type;//
 	@Column(name="createtime")
 	private Timestamp createTime;
 	@Column(name="updatetime")

@@ -1,5 +1,7 @@
 package com.mytest.web.controller.admin;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.openqa.selenium.By;
@@ -17,9 +19,9 @@ public class XingZuoReptileMain {
 		DesiredCapabilities caps = setDownloadsPath();//更改默认下载路径		
 		
 		WebDriver driver = new ChromeDriver(caps);
-		driver.get("https://channel.mcdonald.gamescpu.com:8090/#/login");
+		driver.get("https://channel.mieba.4ho7lk.cn:8090/#/login");
 		WebElement loginName = driver.findElement(By.xpath("//*[@id=\"name\"]"));
-		loginName.sendKeys("accc12");
+		loginName.sendKeys("cha");
 		WebElement loginPwd = driver.findElement(By.xpath("//*[@id=\"password\"]"));
 		loginPwd.sendKeys("123456");
 		try {
@@ -48,42 +50,45 @@ public class XingZuoReptileMain {
 			e.printStackTrace();
 		}
 
+		
+		WebElement channel = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[1]/div/div[2]/div/span/div/div/div"));
+		channel.click();
+		WebElement channels = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/ul/li[6]"));
+		channels.click();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+		String date = sdf.format(new Date());
+		// 选择时间
 		WebElement start = driver.findElement(By.xpath("//*[@id=\"range-picker\"]/span/input[1]"));
 		start.click();
-		//		startime.sendKeys("2019-06-19");
-		
-		WebElement startime = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[1]/div[1]/div/input"));
-		startime.sendKeys("2019-06-19");
-		WebElement endtime = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div[1]/div/input"));
-		
-//		WebElement endtime = driver.findElement(By.xpath("//*[@id=\"range-picker\"]/span/input[2]"));
-		endtime.sendKeys("2019-06-20");
-		
-		WebElement search = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[3]/div/div/div/span/span/button[1]"));
+		WebElement startime = driver
+				.findElement(By.xpath("/html/body/div[3]/div/div/div/div/div[1]/div[1]/div[1]/div/input"));
+		startime.sendKeys(date);
+		WebElement endtime = driver
+				.findElement(By.xpath("/html/body/div[3]/div/div/div/div/div[1]/div[2]/div[1]/div/input"));
+		endtime.sendKeys(date);
+		WebElement search = driver.findElement(By.xpath(
+				"//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[3]/div/div/div/span/span/button[1]"));
 		search.click();
-		
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		int registNums = 0;
+		WebElement registNum = driver.findElement(By.xpath(
+				"//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[2]/div/div/div/div/div/div/div/table/tbody/tr/td[1]"));
+		System.out.println("---" + registNum.getText());
+		registNums = Integer.valueOf(registNum.getText());
 		
-		// WebElement frame =
-		// driver.findElement(By.xpath("//*[@id='content-main']/iframe[2]"));
-		// driver = driver.switchTo().frame(frame);
-
-		WebElement loanNum = driver.findElement(By.xpath(
-				"//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[2]/div/div/div/div/div/div/div/table/tbody/tr/td[3]"));
-		System.out.println("---" + loanNum.getText());
-
 		WebElement applactionNum = driver.findElement(By.xpath(
 				"//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[2]/div/div/div/div/div/div/div/table/tbody/tr/td[2]"));
 		System.out.println("---" + applactionNum.getText());
 
-//		//下载
-//		WebElement one = driver.findElement(
-//				By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[4]/button"));
-//		one.click();
+		//下载
+		WebElement one = driver.findElement(
+				By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[2]/div/div/div/div[1]/form/div/div[4]/button"));
+		one.click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {

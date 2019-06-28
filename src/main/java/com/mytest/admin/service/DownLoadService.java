@@ -41,7 +41,7 @@ public class DownLoadService {
 	 * @return
 	 */
 	public DesiredCapabilities setDownloadsPath(String url) {
-		String downloadsPath = "C:\\Users\\Administrator\\Downloads\\reptileproject\\" + url;
+		String downloadsPath = "C:\\Users\\RYX\\Downloads\\reptileproject\\" + url;
 		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
 		chromePrefs.put("download.default_directory", downloadsPath);
 		ChromeOptions options = new ChromeOptions();
