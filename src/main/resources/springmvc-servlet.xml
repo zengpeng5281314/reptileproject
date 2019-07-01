@@ -10,15 +10,16 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     
     <description>Spring MVC Configuration dev</description>
     
-    <!-- 閸旂姾娴囬柊宥囩枂鐏炵偞锟窖勬瀮娴狅拷 -->
+    <!-- 闁告梻濮惧ù鍥煀瀹ュ洨鏋傞悘鐐靛仦閿熺獤鍕�ù鐙呮嫹 -->
 	<context:property-placeholder ignore-unresolvable="true" location="classpath*:/application.properties" />
+	<context:property-placeholder ignore-unresolvable="true" location="classpath*:/environment.properties" />
 	
-	<!-- 娴ｈ法鏁nnotation閼奉亜濮╁▔銊ュ斀Bean,閸欘亝澹傞幓寤咰ontroller -->
- 	 <context:component-scan base-package="com"><!-- base-package 婵″倹鐏夋径姘嚋閿涘瞼鏁ら垾锟�,閳ユ繂鍨庨梾锟� -->
+	<!-- 濞达綀娉曢弫顥notation闁煎浜滄慨鈺佲枖閵娿儱鏂�Bean,闁告瑯浜濇竟鍌炲箵瀵ゅ挵ontroller -->
+ 	 <context:component-scan base-package="com"><!-- base-package 濠碘�冲�归悘澶嬪緞濮橆偊鍤嬮柨娑樼灱閺併倝鍨鹃敓锟�,闁炽儲绻傞崹搴ㄦ⒕閿燂拷 -->
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>  
 	
-	<!-- 鐠佸墽鐤嗙拠閿嬬湴閺勭姴鐨犵紓鏍垳閿涘矁袙閸愮煢ResponseBody娑旇京鐖滈梻顕�顣� -->
+	<!-- 閻犱礁澧介悿鍡欐嫚闁垮婀撮柡鍕Т閻ㄧ姷绱撻弽顐ゅ灣闁挎稑鐭佽闁告劗鐓esponseBody濞戞棁浜悥婊堟⒒椤曪拷椤ｏ拷 -->
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <list>
@@ -33,16 +34,16 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         </property>
     </bean>
     
-	<!--  閸氼垰濮╁▔銊ㄐ�,姒涙顓婚惃鍕暈鐟欙絾妲х亸鍕畱閺�顖涘瘮閿涘rg.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping -->
+	<!--  闁告凹鍨版慨鈺佲枖閵娿剱锟�,濮掓稒顭堥濠氭儍閸曨剚鏆堥悷娆欑稻濡惭呬焊閸曨厽鐣遍柡锟介娑樼槷闁挎稑顔坮g.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping -->
 	<mvc:annotation-driven/>
 
-	<!-- 鐎靛綊娼ら幀浣界カ濠ф劖鏋冩禒鍓佹畱鐠佸潡妫堕敍锟� 鐏忓棙妫ゅ▔鏄篴pping閸掔檲ontroller閻ㄥ埦ath娴溿倗绮癲efault servlet handler婢跺嫮鎮� -->
+	<!-- 閻庨潧缍婂銈夊箑娴ｇ晫銈繝褎鍔栭弸鍐╃閸撲焦鐣遍悹浣告健濡爼鏁嶉敓锟� 閻忓繐妫欏Λ銈呪枖閺勭pping闁告帞妾瞣ntroller闁汇劌鍩th濞存嚎鍊楃划鐧瞖fault servlet handler濠㈣泛瀚幃锟� -->
 	<mvc:default-servlet-handler/>
 
 
 
 
-	<!-- 鐎规矮绠熼弮鐕檕ntroller閻ㄥ埦ath<->view閻╁瓨甯撮弰鐘茬殸 -->
+	<!-- 閻庤鐭粻鐔煎籍閻曟獣ntroller闁汇劌鍩th<->view闁烩晛鐡ㄧ敮鎾及閻樿尙娈� -->
 	<mvc:view-controller path="/" view-name="redirect:${web.view.index}"/>
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -73,36 +74,36 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	
 	
 
-	<!-- 鐟欏棗娴橀弬鍥︽鐟欙絾鐎介柊宥囩枂 -->
+	<!-- 閻熸瑥妫楀ù姗�寮崶锔筋偨閻熸瑱绲鹃悗浠嬫煀瀹ュ洨鏋� -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
 		<property name="prefix" value="${web.view.prefix}"/>
 		<property name="suffix" value="${web.view.suffix}"/>
 	</bean>
 	
-	<!-- 鐎规矮绠熼弮鐕檕ntroller閻ㄥ埦ath<->view閻╁瓨甯撮弰鐘茬殸 -->
+	<!-- 閻庤鐭粻鐔煎籍閻曟獣ntroller闁汇劌鍩th<->view闁烩晛鐡ㄧ敮鎾及閻樿尙娈� -->
 	<mvc:view-controller path="/" view-name="redirect:${web.view.index}"/>
 
 	
-	<!-- 闂堟瑦锟戒焦鏋冩禒璁圭礄css閵嗕汞s閵嗕巩mages閿涘鍘ょ純顔荤瑝缂佸繗绻僁ispatchServelet婢跺嫮鎮� 
+	<!-- 闂傚牊鐟﹂敓鎴掔劍閺嬪啯绂掔拋鍦css闁靛棔姹瀞闁靛棔宸﹎ages闁挎稑顦甸崢銈囩磾椤旇崵鐟濈紓浣哥箺缁诲儊ispatchServelet濠㈣泛瀚幃锟� 
 	<mvc:resources location="/resources/" mapping="/resources/**" />
 	-->
 	
-	<!-- 娑撳﹣绱堕弬鍥︽閹凤附鍩呴敍宀冾啎缂冾喗娓舵径褌绗傛导鐘虫瀮娴犺泛銇囩亸锟�   10M=10*1024*1024(B)=10485760 bytes -->  
+	<!-- 濞戞挸锕ｇ槐鍫曞棘閸ワ附顐介柟鍑ら檮閸╁懘鏁嶅畝鍐惧晭缂傚喚鍠楀〒鑸靛緞瑜岀粭鍌涘閻樿櫕鐎ù鐘烘硾閵囧洨浜搁敓锟�   10M=10*1024*1024(B)=10485760 bytes -->  
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
         <property name="maxUploadSize" value="10485760" />  
     </bean>
     
-	<!-- 瀵倸鐖剁憴锝嗙�介崳锟� -->
+	<!-- 鐎殿喖鍊搁悥鍓佹喆閿濆棛锟戒粙宕抽敓锟� -->
 	<bean id="simpleMappingExceptionResolver"
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
-				<!-- 閺傝纭舵稉宥嗘暜閹镐線鏁婄拠锟� -->
+				<!-- 闁哄倽顫夌涵鑸电▔瀹ュ棙鏆滈柟闀愮窔閺佸﹦鎷犻敓锟� -->
 				<prop
 					key="org.springframework.web.HttpRequestMethodNotSupportedException">common/500</prop>
 			</props>
 		</property>
 	</bean>
-	<task:annotation-driven /> <!-- 鐎规碍妞傞崳銊ョ磻閸忥拷-->  
+	<task:annotation-driven /> <!-- 閻庤纰嶅鍌炲闯閵娿儳纾婚柛蹇ユ嫹-->  
 </beans>

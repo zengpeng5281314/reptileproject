@@ -18,9 +18,10 @@ public class DownLoadUserInfoService {
 	@Autowired
 	MFrameworkService mFrameworkService;
 	
-	public List<TXZDownUserInfoPo> allTXZDownUserInfoPoList(){
+	public List<TXZDownUserInfoPo> allTXZDownUserInfoPoList(int type){
 		MParam mparam = new MParam();
 		mparam.add("status", 1);
+		mparam.add("type", type);
 		return mFrameworkService.listAll(TXZDownUserInfoPo.class, mparam);
 	}
 	

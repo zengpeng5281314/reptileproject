@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -29,14 +30,14 @@ public class MoJingReptileMain {
 		WebElement loginPwd = driver.findElement(By.xpath("//*[@id=\"password\"]"));
 		loginPwd.sendKeys("6b8550af");
 		WebElement code = driver.findElement(By.xpath("/html/body/div/div/div[4]/img"));
-		File file = new File("C:\\Users\\zengp\\Documents\\11.jpg");
+		File file = new File("C:\\Users\\RYX\\Documents\\11.jpg");
 		String src = code.getAttribute("src");
 		try {
-			FileDownLoad.downLoadFromUrl(src, "11.jpg", "C:\\Users\\zengp\\Documents");
+			FileDownLoad.downLoadFromUrl(src, "11.jpg", "C:\\Users\\RYX\\Documents");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		String verifyCodeStr = FileDownLoad.captchCode(driver, code, "C:\\Users\\zengp\\Documents\\11.png");
+		String verifyCodeStr = FileDownLoad.captchCode(driver, code, "C:\\Users\\RYX\\Documents\\11.jpg");
 
 		WebElement acode = driver.findElement(By.xpath("//*[@id=\"code\"]"));
 		acode.sendKeys(verifyCodeStr);
@@ -88,18 +89,38 @@ public class MoJingReptileMain {
 			WebElement option = driver.findElement(By.xpath("//*[@id=\"layui-laypage-1\"]/span[1]/select/option[6]"));
 			option.click();
 			
-			
-			for (int i = 2; i < 15; i++) {
+			WebElement count = driver.findElement(By.className("layui-laypage-count"));
+			String countText = count.getText().replace("共", "").replace("条", "").replace(" ", "");
+			int countT = Integer.valueOf(countText);
+			int pageSize = countT%200 == 0 ? (countT/200) : (countT/200)+1;
+			for (int i = 1; i <= pageSize; i++) {
+				WebElement table = driver.findElement(By.className("layui-table-main")).findElement(By.className("layui-table"));
+
+				System.out.println(table.getText());
+				
+				  List<WebElement> rows = table.findElements(By.tagName("tr"));
+//				  assertEquals(5,rows.size());
+				  for(WebElement row:rows){
+					  List<WebElement> cols= row.findElements(By.tagName("td"));
+					  for(WebElement col:cols){
+						  System.out.println(col.getText()+"\t");			  
+					  }
+					  System.out.println("");
+				  }
+				
 				Thread.sleep(2000);
-				int j=5;
-				if(i>=6)
-					j=6;
-				if(i>=11)
-					j=5;
-				WebElement currentPage = driver.findElement(By.xpath("//*[@id=\"layui-laypage-"+i+"\"]/span["+j+"]/input"));
+				WebElement currentPage = driver.findElement(By.className("layui-laypage-skip")).findElement(By.className("layui-input"));
+				WebElement button = driver.findElement(By.className("layui-laypage-skip")).findElement(By.className("layui-laypage-btn"));
+				
+//				int j=5;
+//				if(i>=6)
+//					j=6;
+//				if(i>=11)
+//					j=5;
+//				WebElement currentPage = driver.findElement(By.xpath("//*[@id=\"layui-laypage-"+i+"\"]/span["+j+"]/input"));
 				currentPage.clear();
 				currentPage.sendKeys(i+"");
-				WebElement button = driver.findElement(By.xpath("//*[@id=\"layui-laypage-"+i+"\"]/span["+j+"]/button"));
+//				WebElement button = driver.findElement(By.xpath("//*[@id=\"layui-laypage-"+i+"\"]/span["+j+"]/button"));
 				button.click();
 			}
 			if(1==1)

@@ -19,6 +19,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -47,6 +48,8 @@ public class TestInfoController extends BaseController {
 	private DownLoadUserInfoService downLoadUserInfoService;
 	@Autowired
 	private DownLoadDetailedService downLoadDetailedService;
+	@Value("${downloadUrl}")
+	private String downloadUrl;
 
 	@RequestMapping("/test")
 	@Transactional
@@ -54,14 +57,15 @@ public class TestInfoController extends BaseController {
 	public String test(@RequestParam(defaultValue = "0", required = false, value = "userId") long userId,
 			@RequestParam(defaultValue = "", required = false, value = "date") String date, HttpServletRequest request,
 			HttpServletResponse response, ModelMap model) throws Exception {
-		List<TXZDownUserInfoPo> list = downLoadUserInfoService.allTXZDownUserInfoPoList();
+		List<TXZDownUserInfoPo> list = downLoadUserInfoService.allTXZDownUserInfoPoList(1);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		if (date.equals(""))
 			date = sdf.format(new Date());
 		for (TXZDownUserInfoPo txzDownUserInfoPo : list) {
 			System.setProperty("webdriver.chrome.driver",
 					"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
-			DesiredCapabilities caps = downLoadService.setDownloadsPath(String.valueOf(txzDownUserInfoPo.getUserId()));// 更改默认下载路径
+			String urlChrome=downloadUrl+"reptileproject\\"+String.valueOf(txzDownUserInfoPo.getUserId());
+			DesiredCapabilities caps = downLoadService.setDownloadsPath(urlChrome);// 更改默认下载路径
 
 			WebDriver driver = new ChromeDriver(caps);
 			driver.get(txzDownUserInfoPo.getAddress());
