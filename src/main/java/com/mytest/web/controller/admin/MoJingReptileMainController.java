@@ -168,12 +168,35 @@ public class MoJingReptileMainController extends BaseController {
 			driver = driver.switchTo().frame(frame3);
 //			Thread.sleep(2000);
 			wait = new WebDriverWait(driver, 5);
-		    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"layui-laypage-1\"]/span[1]/select")));
-			WebElement select = driver.findElement(By.xpath("//*[@id=\"layui-laypage-1\"]/span[1]/select"));
+		   
+		    WebElement beginTime2 = driver.findElement(By.xpath("//*[@id=\"beginTime\"]"));
+			beginTime2.sendKeys(date);
+			WebElement endTime2 = driver.findElement(By.xpath("//*[@id=\"endTime\"]"));
+			endTime2.sendKeys(date);
+			WebElement search2 = driver.findElement(By.xpath("//*[@id=\"search\"]"));
+			search2.click();
+			Thread.sleep(2000);
+			int istrun=0;
+			try{
+				WebElement noThing = driver.findElement(By.className("layui-none"));
+				//如果能找到元素。说明没有数据
+				istrun=1;
+			}catch(Exception ex){
+				
+			}
+			if(istrun==1){
+				driver.switchTo().defaultContent();
+				driver.quit();
+				return;
+			}
+//			//*[@id="layui-laypage-2"]/span[1]/select
+//			if()
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"layui-laypage-2\"]/span[1]/select")));
+		    WebElement select = driver.findElement(By.xpath("//*[@id=\"layui-laypage-2\"]/span[1]/select"));
 			select.click();
 //			Thread.sleep(1000);
-			 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"layui-laypage-1\"]/span[1]/select/option[6]")));
-			WebElement option = driver.findElement(By.xpath("//*[@id=\"layui-laypage-1\"]/span[1]/select/option[6]"));
+			 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"layui-laypage-2\"]/span[1]/select/option[6]")));
+			WebElement option = driver.findElement(By.xpath("//*[@id=\"layui-laypage-2\"]/span[1]/select/option[6]"));
 			option.click();
 //			Thread.sleep(2000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("layui-laypage-count")));
