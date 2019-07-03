@@ -204,7 +204,7 @@ public class TestInfoController extends BaseController {
 						channleXZDetailedInfoPo.setStatus(1);
 						channleXZDetailedInfoPo.setType(1);
 						channleXZDetailedInfoPo.setUserId(userId);
-						// channleXZDetailedInfoPo.setXzId(0);
+						channleXZDetailedInfoPo.setSource(1);
 					}
 					channleXZDetailedInfoPo.setName(name);
 					channleXZDetailedInfoPo.setNameNo(nameNo);

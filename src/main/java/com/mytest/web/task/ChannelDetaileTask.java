@@ -107,6 +107,7 @@ public class ChannelDetaileTask {
 					channleXZInfoPo.setChannelId(txzDownUserInfoPo.getChannelId());
 					channleXZInfoPo.setCreateTime(new Timestamp(System.currentTimeMillis()));
 					channleXZInfoPo.setStatus(1);
+					channleXZInfoPo.setSource(1);
 				}
 				channleXZInfoPo.setApplicantsNum(Integer.valueOf(applactionNum.getText()));
 				channleXZInfoPo.setRegistNum(registNums);

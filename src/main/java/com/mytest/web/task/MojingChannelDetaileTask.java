@@ -148,6 +148,7 @@ public class MojingChannelDetaileTask {
 				channleXZInfoPo.setChannelId(txzDownUserInfoPo.getChannelId());
 				channleXZInfoPo.setCreateTime(new Timestamp(System.currentTimeMillis()));
 				channleXZInfoPo.setStatus(1);
+				channleXZInfoPo.setSource(2);
 			}
 			channleXZInfoPo.setApplicantsNum(applactionNum);
 			channleXZInfoPo.setRegistNum(registNums);

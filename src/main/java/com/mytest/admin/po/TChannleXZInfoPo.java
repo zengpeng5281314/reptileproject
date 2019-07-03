@@ -39,6 +39,8 @@ public class TChannleXZInfoPo extends MBeanBase implements Serializable {
 	private int loanNum;//
 	@Column(name="ctime")
 	private Date ctime;
+	@Column(name="source")
+	private int source;
 	@Column(name="createtime")
 	private Timestamp createTime;
 	@Column(name="updatetime")
