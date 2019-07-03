@@ -42,6 +42,10 @@ public class TChannleXZDetailedInfoPo extends MBeanBase implements Serializable 
 	private Timestamp registTime;//注册时间
 	@Column(name="type")
 	private int type;//类型 1:注册
+	@Column(name="type_name")
+	private String typeName;//类型 1:注册
+	@Column(name="source")
+	private int source;//类型 1:注册
 	@Column(name="createtime")
 	private Timestamp createTime;
 	@Column(name="updatetime")

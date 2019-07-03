@@ -103,7 +103,9 @@ public class MoJingReptileMain {
 				  for(WebElement row:rows){
 					  List<WebElement> cols= row.findElements(By.tagName("td"));
 					  for(WebElement col:cols){
-						  System.out.println(col.getText()+"\t");			  
+						  System.out.println(col.getText());	
+						  System.out.println(col.getText().trim());
+							System.out.println(col.getText().replace(" ", "") + "\t");
 					  }
 					  System.out.println("");
 				  }
