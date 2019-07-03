@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,8 +16,10 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.mytest.utils.FileDownLoad;
+import com.mytest.utils.LocalStorage;
+import com.mytest.utils.SessionStorage;
 
-public class MoJingReptileMain {
+public class MoJingReptileWebMain {
 
 	public static void main(String[] args) {
 		System.setProperty("webdriver.chrome.driver",
@@ -30,13 +33,13 @@ public class MoJingReptileMain {
 //		WebElement loginPwd = driver.findElement(By.xpath("//*[@id=\"password\"]"));
 //		loginPwd.sendKeys("78b6a6ec");
 		
-		driver.get("http://47.111.102.135:8082/back/static/login.html");
+		driver.get("http://47.244.191.20:8080/back/static/login.html");
 		WebElement loginName = driver.findElement(By.xpath("//*[@id=\"userName\"]"));
-		loginName.sendKeys("13020203030");
+		loginName.sendKeys("17600441333");
 		WebElement loginPwd = driver.findElement(By.xpath("//*[@id=\"password\"]"));
-		loginPwd.sendKeys("6b8550af");
+		loginPwd.sendKeys("123456");
 		
-		WebElement code = driver.findElement(By.xpath("/html/body/div/div/div[4]/img"));
+		WebElement code = driver.findElement(By.xpath("/html/body/div[1]/div/div/img"));
 		File file = new File("C:\\Users\\RYX\\Documents\\11.jpg");
 		String src = code.getAttribute("src");
 		try {
@@ -51,8 +54,20 @@ public class MoJingReptileMain {
 		try {
 			WebElement loginBtn = driver.findElement(By.xpath("//*[@id=\"login\"]"));
 			loginBtn.click();
-
-			detail(driver);
+			Thread.sleep(2000);
+//			String sef="";
+//			 for (Cookie cookie:driver.manage().getCookies()){
+//				 System.out.println(cookie.getName()+"  "+cookie.getValue());
+//				 sef+=cookie.getName()+"="+cookie.getValue()+"&";
+//			 }
+			 SessionStorage localStorage = new SessionStorage(driver);
+			 String sef=localStorage.getItemFromLocalStorage("token");
+			System.out.println(sef); 
+			
+			driver.get("http://47.244.191.20:8080/back/channelReport/getChannelReportPage?pageNum=1&numPerPage=20&channelCode=&startTime=&endTime=&token="+sef);
+			WebElement json = driver.findElement(By.xpath("/html/body/pre"));
+		System.out.println(json.getText());
+//			detail(driver);
 		} catch (Throwable e11) {
 			driver.switchTo().defaultContent();
 			driver.quit();
@@ -62,7 +77,7 @@ public class MoJingReptileMain {
 
 	private static void detail(WebDriver driver) {
 		try {
-			Thread.sleep(2000);
+			
 			WebElement menu1 = driver.findElement(By.xpath("//*[@id=\"LAY-system-side-menu\"]/li[1]/a"));
 			menu1.click();
 

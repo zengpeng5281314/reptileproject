@@ -73,7 +73,7 @@ public class MoJingReptileMainController extends BaseController {
 				loginName.sendKeys(txzDownUserInfoPo.getUserName());
 				WebElement loginPwd = driver.findElement(By.xpath("//*[@id=\"password\"]"));
 				loginPwd.sendKeys(txzDownUserInfoPo.getUserPwd());
-				WebElement code = driver.findElement(By.xpath("/html/body/div/div/div[4]/img"));
+				WebElement code = driver.findElement(By.xpath("/html/body/div[1]/div/div/img"));
 				String src = code.getAttribute("src");
 				try {
 					FileDownLoad.downLoadFromUrl(src, "11.png", downloadUrl + "mojing/");
@@ -103,17 +103,17 @@ public class MoJingReptileMainController extends BaseController {
 		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"LAY-system-side-menu\"]/li[1]/a")));
 
 		try {
-			// Thread.sleep(2000);
+			 Thread.sleep(2000);
 			WebDriverWait wait = new WebDriverWait(driver, 5);
 			wait.until(ExpectedConditions
 					.visibilityOfElementLocated(By.xpath("//*[@id=\"LAY-system-side-menu\"]/li[1]/a")));
 			WebElement menu1 = driver.findElement(By.xpath("//*[@id=\"LAY-system-side-menu\"]/li[1]/a"));
 			menu1.click();
-
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.xpath("//*[@id=\"LAY-system-side-menu\"]/li[1]/dl/dd[3]/a")));
-			// Thread.sleep(500);
-			WebElement qudao = driver.findElement(By.xpath("//*[@id=\"LAY-system-side-menu\"]/li[1]/dl/dd[3]/a"));
+			//*[@id="LAY-system-side-menu"]/li[1]/dl/dd/a
+//			wait.until(ExpectedConditions
+//					.visibilityOfElementLocated(By.xpath("//*[@id=\"LAY-system-side-menu\"]/li[1]/dl/dd[3]/a")));
+			 Thread.sleep(2000);
+			WebElement qudao = driver.findElement(By.xpath("//*[@id=\"LAY-system-side-menu\"]/li[1]/dl/dd/a"));
 			qudao.click();
 
 			// Thread.sleep(1000);
@@ -165,7 +165,7 @@ public class MoJingReptileMainController extends BaseController {
 			driver.switchTo().defaultContent();
 			WebElement menu2 = driver.findElement(By.xpath("//*[@id=\"LAY-system-side-menu\"]/li[2]/a"));
 			menu2.click();
-			WebElement regist = driver.findElement(By.xpath("//*[@id=\"LAY-system-side-menu\"]/li[2]/dl/dd[2]/a"));
+			WebElement regist = driver.findElement(By.xpath("//*[@id=\"LAY-system-side-menu\"]/li[2]/dl/dd/a"));
 			regist.click();
 
 			WebElement frame3 = driver.findElement(By.xpath("//*[@id=\"contentBody\"]/iframe[3]"));
