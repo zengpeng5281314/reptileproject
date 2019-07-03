@@ -14,6 +14,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mytest.utils.FileDownLoad;
 import com.mytest.utils.LocalStorage;
@@ -27,19 +29,19 @@ public class MoJingReptileWebMain {
 		DesiredCapabilities caps = setDownloadsPath();// 更改默认下载路径
 
 		WebDriver driver = new ChromeDriver(caps);
-//		driver.get("http://47.75.129.121:8080/back/static/login.html");
-//		WebElement loginName = driver.findElement(By.xpath("//*[@id=\"userName\"]"));
-//		loginName.sendKeys("17077777777");
-//		WebElement loginPwd = driver.findElement(By.xpath("//*[@id=\"password\"]"));
-//		loginPwd.sendKeys("78b6a6ec");
-		
-		driver.get("http://47.244.191.20:8080/back/static/login.html");
+		driver.get("http://47.75.129.121:8080/back/static/login.html");
 		WebElement loginName = driver.findElement(By.xpath("//*[@id=\"userName\"]"));
-		loginName.sendKeys("17600441333");
+		loginName.sendKeys("17077777777");
 		WebElement loginPwd = driver.findElement(By.xpath("//*[@id=\"password\"]"));
-		loginPwd.sendKeys("123456");
+		loginPwd.sendKeys("78b6a6ec");
 		
-		WebElement code = driver.findElement(By.xpath("/html/body/div[1]/div/div/img"));
+//		driver.get("http://47.244.191.20:8080/back/static/login.html");
+//		WebElement loginName = driver.findElement(By.xpath("//*[@id=\"userName\"]"));
+//		loginName.sendKeys("17600441333");
+//		WebElement loginPwd = driver.findElement(By.xpath("//*[@id=\"password\"]"));
+//		loginPwd.sendKeys("123456");
+		
+		WebElement code = driver.findElement(By.className("code-img")).findElement(By.tagName("img"));
 		File file = new File("C:\\Users\\RYX\\Documents\\11.jpg");
 		String src = code.getAttribute("src");
 		try {
@@ -64,7 +66,11 @@ public class MoJingReptileWebMain {
 			 String sef=localStorage.getItemFromLocalStorage("token");
 			System.out.println(sef); 
 			
-			driver.get("http://47.244.191.20:8080/back/channelReport/getChannelReportPage?pageNum=1&numPerPage=20&channelCode=&startTime=&endTime=&token="+sef);
+			driver.get("http://47.75.129.121:8080/back/channelReport/getChannelReportPage?pageNum=1&numPerPage=200&channelCode=&startTime=&endTime=&token="+sef);
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			wait.until(ExpectedConditions
+					.visibilityOfElementLocated(By.xpath("/html/body/pre")));
+//			Thread.sleep(5000);
 			WebElement json = driver.findElement(By.xpath("/html/body/pre"));
 		System.out.println(json.getText());
 //			detail(driver);
