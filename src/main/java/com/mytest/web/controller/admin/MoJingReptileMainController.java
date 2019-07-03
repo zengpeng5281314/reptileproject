@@ -94,7 +94,7 @@ public class MoJingReptileMainController extends BaseController {
 				e11.printStackTrace();
 			}
 		}
-		return null;
+		return successJson(null);
 	}
 
 	private void detail(WebDriver driver, String date, TXZDownUserInfoPo txzDownUserInfoPo) {
