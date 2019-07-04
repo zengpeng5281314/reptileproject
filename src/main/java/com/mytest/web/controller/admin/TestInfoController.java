@@ -159,7 +159,7 @@ public class TestInfoController extends BaseController {
 
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String fileUrl = "C:\\Users\\Administrator\\Downloads\\reptileproject\\" + userId;
+			String fileUrl = downloadUrl+"reptileproject\\" + userId;
 			// 获取所有以xsl结尾的文件
 			List<File> list = downLoadService.getFileList(fileUrl);
 			for (File file : list) {

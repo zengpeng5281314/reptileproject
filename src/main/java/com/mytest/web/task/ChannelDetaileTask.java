@@ -22,7 +22,6 @@ import com.mytest.admin.po.TXZDownUserInfoPo;
 import com.mytest.admin.service.DownLoadDetailedService;
 import com.mytest.admin.service.DownLoadService;
 import com.mytest.admin.service.DownLoadUserInfoService;
-import com.mytest.utils.AHttpClient;
 import com.mytest.utils.HttpClient4;
 
 @Component
