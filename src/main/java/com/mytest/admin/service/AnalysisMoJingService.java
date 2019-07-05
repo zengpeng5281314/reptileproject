@@ -37,6 +37,12 @@ public class AnalysisMoJingService {
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor("yyyy-MM-dd HH:mm:ss"));
 		JSONObject jon = JSONObject.fromObject(json, jsonConfig);
+		//{"code":"40000","data":null,"message":"未登录，请重新登陆"}
+		if(!jon.containsKey("code"))
+			return;
+		String code = jon.getString("code");
+		if(!code.equals("2000"))
+			return;
 		if (jon.containsKey("data")) {
 			// JSONArray channleList =
 			// jon.getJSONObject("data").getJSONArray("channelList");
@@ -82,6 +88,11 @@ public class AnalysisMoJingService {
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.registerJsonValueProcessor(Timestamp.class, new JsonDateValueProcessor("yyyy-MM-dd HH:mm:ss"));
 		JSONObject jon = JSONObject.fromObject(json, jsonConfig);
+		if(!jon.containsKey("code"))
+			return;
+		String code = jon.getString("code");
+		if(!code.equals("2000"))
+			return;
 		if (jon.containsKey("data")) {
 			JSONObject channelpm = jon.getJSONObject("data").getJSONObject("pm");
 			JSONArray items = channelpm.getJSONArray("items");
