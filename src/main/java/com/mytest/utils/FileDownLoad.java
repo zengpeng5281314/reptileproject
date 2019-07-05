@@ -1,6 +1,10 @@
 package com.mytest.utils;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -102,14 +106,22 @@ public class FileDownLoad {
 
     public static void main(String[] args) {
         try{
-            downLoadFromUrl("http://peiqibao.zhulidao.com/getCode?1560225937487",
-                    "11.jpg","C:\\Users\\RYX\\Documents");
+//            downLoadFromUrl("http://47.52.207.144:8082/back/getVolidateCode?flag=0.8331627033632534",
+//                    "11.jpg","C:\\Users\\RYX\\Documents");
+        	File f = new File("C:\\Users\\RYX\\Documents\\11.jpg");
+           String verifyCodeStr = CaptchaUtil.convert(f, "1004"); // 调用第三方自动解析验证码接口获取验证码值
+           System.out.println(verifyCodeStr);
         }catch (Exception e) {
             // TODO: handle exception
         }
     }
     
-    
+    public static String sibie(String path){
+    	File f = new File(path);
+    	String verifyCodeStr = CaptchaUtil.convert(f, "1004"); // 调用第三方自动解析验证码接口获取验证码值
+		f.delete();
+		return verifyCodeStr;
+    }
     
     
     
@@ -125,6 +137,35 @@ public class FileDownLoad {
     		File f = new File(path);
     		cutImage(new FileInputStream(srcFile), f, x, y, width, height);
     		verifyCodeStr = CaptchaUtil.convert(f, "1004"); // 调用第三方自动解析验证码接口获取验证码值
+    		f.delete();
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+		return verifyCodeStr;
+    }
+    
+    public static String captchCode1(WebDriver driver,WebElement verifyCode ,String path){
+    	String verifyCodeStr = "";
+    	try{
+    		//此方法仅适用于JdK1.6及以上版本  
+    	    Robot robot = new Robot();  
+    	    robot.delay(10000);  
+    	    Dimension d = verifyCode.getSize();
+    	    int width = (int) d.getWidth();  
+    	    int height = (int) d.getHeight();  
+    	    //最大化浏览器  
+    	    robot.keyRelease(KeyEvent.VK_F11);  
+    	    robot.delay(2000);  
+    	    Image image = robot.createScreenCapture(new Rectangle(0, 0, width,  
+    	            height));  
+    	    BufferedImage bi = new BufferedImage(width, height,  
+    	            BufferedImage.TYPE_INT_RGB);  
+    	    Graphics g = bi.createGraphics();  
+    	    g.drawImage(image, 0, 0, width, height, null);  
+    	    File f = new File(path);
+    	    //保存图片  
+    	    ImageIO.write(bi, "jpg", f);  
+    	    verifyCodeStr = CaptchaUtil.convert(f, "1004"); // 调用第三方自动解析验证码接口获取验证码值
     		f.delete();
     	}catch(Exception e){
     		e.printStackTrace();

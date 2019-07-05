@@ -87,7 +87,6 @@ public class MoJingReptileMainController2 extends BaseController {
 					e.printStackTrace();
 				}
 				String verifyCodeStr = FileDownLoad.captchCode(driver, code, downloadUrl + "mojing/11.png");
-
 				WebElement acode = driver.findElement(By.xpath("//*[@id=\"code\"]"));
 				acode.sendKeys(verifyCodeStr);
 

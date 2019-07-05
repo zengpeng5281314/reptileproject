@@ -44,15 +44,15 @@ public class MoJingReptileWebMain {
 		// loginPwd.sendKeys("123456");
 
 		WebElement code = driver.findElement(By.className("code-img")).findElement(By.tagName("img"));
-		File file = new File("C:\\Users\\RYX\\Documents\\11.jpg");
+//		File file = new File("C:\\Users\\RYX\\Documents\\11.jpg");
 		String src = code.getAttribute("src");
 		try {
-			FileDownLoad.downLoadFromUrl(src, "11.jpg", "C:\\Users\\RYX\\Documents");
+			FileDownLoad.downLoadFromUrl(src, "11.png", "C:\\Users\\RYX\\Documents");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		String verifyCodeStr = FileDownLoad.captchCode(driver, code, "C:\\Users\\RYX\\Documents\\11.jpg");
-
+		String verifyCodeStr = FileDownLoad.captchCode(driver, code, "C:\\Users\\RYX\\Documents\\11.png");
+//		String verifyCodeStr = FileDownLoad.sibie("C:\\Users\\RYX\\Documents\\11.png");
 		WebElement acode = driver.findElement(By.xpath("//*[@id=\"code\"]"));
 		acode.sendKeys(verifyCodeStr);
 		try {
