@@ -32,7 +32,7 @@ import org.openqa.selenium.WebElement;
 
 public class FileDownLoad {
 	/**
-     * 从网络Url中下载文件
+     * 浠庣綉缁淯rl涓笅杞芥枃浠�
      * @param urlStr
      * @param fileName
      * @param savePath
@@ -41,17 +41,17 @@ public class FileDownLoad {
     public static void  downLoadFromUrl(String urlStr,String fileName,String savePath) throws IOException{
         URL url = new URL(urlStr);  
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();  
-                //设置超时间为3秒
+                //璁剧疆瓒呮椂闂翠负3绉�
         conn.setConnectTimeout(3*1000);
-        //防止屏蔽程序抓取而返回403错误
-        conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
-
-        //得到输入流
+        //闃叉灞忚斀绋嬪簭鎶撳彇鑰岃繑鍥�403閿欒
+//        conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+//        conn.setRequestMethod("POST");
+        //寰楀埌杈撳叆娴�
         InputStream inputStream = conn.getInputStream();  
-        //获取自己数组
+        //鑾峰彇鑷繁鏁扮粍
         byte[] getData = readInputStream(inputStream);    
 
-        //文件保存位置
+        //鏂囦欢淇濆瓨浣嶇疆
         File saveDir = new File(savePath);
         if(!saveDir.exists()){
             saveDir.mkdir();
@@ -74,21 +74,21 @@ public class FileDownLoad {
     public static byte[] readInputStream(String urlStr)throws IOException {  
     	URL url = new URL(urlStr);  
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();  
-                //设置超时间为3秒
+                //璁剧疆瓒呮椂闂翠负3绉�
         conn.setConnectTimeout(3*1000);
-        //防止屏蔽程序抓取而返回403错误
+        //闃叉灞忚斀绋嬪簭鎶撳彇鑰岃繑鍥�403閿欒
         conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
 
-        //得到输入流
+        //寰楀埌杈撳叆娴�
         InputStream inputStream = conn.getInputStream();  
-        //获取自己数组
+        //鑾峰彇鑷繁鏁扮粍
         byte[] getData = readInputStream(inputStream);    
         return getData;
     }
 
 
     /**
-     * 从输入流中获取字节数组
+     * 浠庤緭鍏ユ祦涓幏鍙栧瓧鑺傛暟缁�
      * @param inputStream
      * @return
      * @throws IOException
@@ -106,19 +106,20 @@ public class FileDownLoad {
 
     public static void main(String[] args) {
         try{
-//            downLoadFromUrl("http://47.52.207.144:8082/back/getVolidateCode?flag=0.8331627033632534",
-//                    "11.jpg","C:\\Users\\RYX\\Documents");
-        	File f = new File("C:\\Users\\RYX\\Documents\\11.jpg");
-           String verifyCodeStr = CaptchaUtil.convert(f, "1004"); // 调用第三方自动解析验证码接口获取验证码值
-           System.out.println(verifyCodeStr);
+            downLoadFromUrl("http://aft.ffgwfc.xyz:8080/back/getVolidateCode?flag=0.32517668923828946",
+                    "11.jpg","C:\\Users\\RYX\\Documents");
+//        	File f = new File("C:\\Users\\RYX\\Documents\\11.jpg");
+//           String verifyCodeStr = CaptchaUtil.convert(f, "1004"); // 璋冪敤绗笁鏂硅嚜鍔ㄨВ鏋愰獙璇佺爜鎺ュ彛鑾峰彇楠岃瘉鐮佸��
+//           System.out.println(verifyCodeStr);
         }catch (Exception e) {
             // TODO: handle exception
+        	e.printStackTrace();
         }
     }
     
     public static String sibie(String path){
     	File f = new File(path);
-    	String verifyCodeStr = CaptchaUtil.convert(f, "1004"); // 调用第三方自动解析验证码接口获取验证码值
+    	String verifyCodeStr = CaptchaUtil.convert(f, "1004"); // 璋冪敤绗笁鏂硅嚜鍔ㄨВ鏋愰獙璇佺爜鎺ュ彛鑾峰彇楠岃瘉鐮佸��
 		f.delete();
 		return verifyCodeStr;
     }
@@ -136,7 +137,7 @@ public class FileDownLoad {
     		int y=verifyCode.getLocation().y;
     		File f = new File(path);
     		cutImage(new FileInputStream(srcFile), f, x, y, width, height);
-    		verifyCodeStr = CaptchaUtil.convert(f, "1004"); // 调用第三方自动解析验证码接口获取验证码值
+    		verifyCodeStr = CaptchaUtil.convert(f, "1004"); // 璋冪敤绗笁鏂硅嚜鍔ㄨВ鏋愰獙璇佺爜鎺ュ彛鑾峰彇楠岃瘉鐮佸��
     		f.delete();
     	}catch(Exception e){
     		e.printStackTrace();
@@ -147,13 +148,13 @@ public class FileDownLoad {
     public static String captchCode1(WebDriver driver,WebElement verifyCode ,String path){
     	String verifyCodeStr = "";
     	try{
-    		//此方法仅适用于JdK1.6及以上版本  
+    		//姝ゆ柟娉曚粎閫傜敤浜嶫dK1.6鍙婁互涓婄増鏈�  
     	    Robot robot = new Robot();  
     	    robot.delay(10000);  
     	    Dimension d = verifyCode.getSize();
     	    int width = (int) d.getWidth();  
     	    int height = (int) d.getHeight();  
-    	    //最大化浏览器  
+    	    //鏈�澶у寲娴忚鍣�  
     	    robot.keyRelease(KeyEvent.VK_F11);  
     	    robot.delay(2000);  
     	    Image image = robot.createScreenCapture(new Rectangle(0, 0, width,  
@@ -163,9 +164,9 @@ public class FileDownLoad {
     	    Graphics g = bi.createGraphics();  
     	    g.drawImage(image, 0, 0, width, height, null);  
     	    File f = new File(path);
-    	    //保存图片  
+    	    //淇濆瓨鍥剧墖  
     	    ImageIO.write(bi, "jpg", f);  
-    	    verifyCodeStr = CaptchaUtil.convert(f, "1004"); // 调用第三方自动解析验证码接口获取验证码值
+    	    verifyCodeStr = CaptchaUtil.convert(f, "1004"); // 璋冪敤绗笁鏂硅嚜鍔ㄨВ鏋愰獙璇佺爜鎺ュ彛鑾峰彇楠岃瘉鐮佸��
     		f.delete();
     	}catch(Exception e){
     		e.printStackTrace();
@@ -174,7 +175,7 @@ public class FileDownLoad {
     }
     
     /*
-	 * 图片裁剪
+	 * 鍥剧墖瑁佸壀
 	 */
 	public static void cutImage(InputStream in, File dest, int x, int y, int w, int h) throws IOException {
 		Iterator<ImageReader> iterator = ImageIO.getImageReadersByFormatName("png");
